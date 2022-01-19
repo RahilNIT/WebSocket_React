@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 It is a real time getting bids and asks fetching from [bitstamp.net](https://www.bitstamp.net/) acourding to filter on header, and has simple change theme to dark & light.
 
-### Developer : Rahil Enayati
+Developer : Rahil Enayati
 
 ## Available Scripts
 
