@@ -16,13 +16,12 @@ const OrderBook = (props) => {
     const changeOrder = (order) => {
         setOrder(order);
         
-
         switch(order){
             case 'btcusdt':
                 unit = 'BTC';
                 break;
-            case 'athusdt':
-                unit = 'ATH';
+            case 'ethusdt':
+                unit = 'ETH';
                 break;
             case 'adausdt':
                 unit = 'ADA';
@@ -43,7 +42,7 @@ const OrderBook = (props) => {
                     <FormControl fullWidth>
                         <Select class="width-200" id="order-select" value={order} onChange={ e => changeOrder(e.target.value)}>
                             <MenuItem value="btcusdt">BTC/USDT</MenuItem>
-                            <MenuItem value="athusdt">ETH/USDT</MenuItem>
+                            <MenuItem value="ethusdt">ETH/USDT</MenuItem>
                             <MenuItem value="adausdt">ADA/USDT</MenuItem>
                         </Select>
                     </FormControl>

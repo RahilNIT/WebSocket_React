@@ -1,91 +1,105 @@
 
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 const WebSocket_call = (order) => {
+
+    const [bids, setBids] = useState([0]);
+    const [asks, setAsks] = useState([0]);
 
     console.log('WebSocket_call - OrderType:' + order)
 
     //#region Successfull test of WebSocket
 
-    // const ws = useRef(new WebSocket("wss://ws.bitstamp.net"));
-    // const apiCall = {
-    //     event: "bts:subscribe",
-    //     data: { channel: "order_book_btcusd" },
-    // };
+    const ws = useRef(new WebSocket("wss://ws.bitstamp.net"));
 
-    // ws.current.onopen = (event) => {
-    //    vfd
-    //     ws.current.send(JSON.stringify(apiCall));
-    // };
+    ws.current.onopen = (event) => {
+
+        const apiCall = {
+            event: "bts:subscribe",
+            data: { channel: "order_book_" + order.slice(0,-1) + "" },
+          };
+
+        ws.current.send(JSON.stringify(apiCall));
+    };
     
-    // ws.current.onmessage = function (event) {
-    //     const json = JSON.parse(event.data);
-    //     try {
-    //         if ((json.event = "data")) {
+    ws.current.onmessage = function (event) {
 
-    //             var bids = json.data.bids;
-    //             console.log(bids)
-    //         }
-    //     } catch (err) {
-    //       console.log(err);
-    //     }
-    // };
+        const json = JSON.parse(event.data);
+        try {
+            if (json.event = "data") { //get 10 data each
+                setBids(json.data.bids.slice(0, 10)); 
+                setAsks(json.data.asks.slice(0, 10));
+            }
+        }
+        catch (err) {
+          console.log(err);
+        }
+    };
 
-    //map the first 5 bids
-    // const firstBids = bids.map((item) => 
-    //     <tr>
-    //         <td> {item}</td>
-    //         <td></td>
-    //     </tr>
-    // );
+    const bidsRows = bids.map((item, index) => {
+        return(
+            //bid ask condition is just example
+            <tr key={index} data-type="bid"> 
+                <td>{item[0]}</td>
+                <td>{item[1]}</td>
+            </tr>
+        );
+    });
+
+    const asksRows = asks.map((item, index) => {
+        return(
+            //bid ask condition is just example
+            <tr key={index} data-type="ask"> 
+                <td>{item[0]}</td>
+                <td>{item[1]}</td>
+            </tr>
+        );
+    });
+
+    setTimeout(()=>{
+
+        const apiCall = {
+            event: "bts:unsubscribe",
+            data: { channel: "order_book_" + order.slice(0,-1) + "" },
+          };
+
+        ws.current.send(JSON.stringify(apiCall));
+    }, 700)
 
     //#endregion
 
-    //#region testing data to show
+    // const ws = useRef(new WebSocket("wss://stream.binance.com:9443"));
 
-    // p: price | q: quantity
-    var tradeInfo = [{"p":11213, "q":211434}, {"p":2222, "q":25434}, {"p":32424, "q":768687}, {"p":456744, "q":613266}];
-    const rows = tradeInfo.map((item, index) => 
-        <tr key={index} data-type="bid">
-            <td>{item.p}</td>
-            <td>{item.q}</td>
-        </tr>
-    );
+    // const apiCall = {
+    //     method: "SUBSCRIBE",
+    //     params: [
+    //         order + "@aggTrade" //"@bookTicker"
+    //     ],
+    //     id: 1
+    // };
 
-    //#endregion test data
+    // ws.current.onopen = (event) => {
+    //     ws.current.send(JSON.stringify(apiCall));
+    // };
 
-    const ws = useRef(new WebSocket("wss://stream.binance.com:9443"));
+    // ws.current.onmessage = function (event) {
+    //     tradeInfo = JSON.parse(event.data);
+    //     try {
+    //         console.log(tradeInfo);
 
-    const apiCall = {
-        method: "SUBSCRIBE",
-        params: [
-            order + "@aggTrade" //"@bookTicker"
-        ],
-        id: 1
-    };
+    //         // const bidsRows = tradeInfo.map((item, index) => 
+    //         //     <tr key={index}>
+    //         //         <td>{item.p}</td>
+    //         //         <td>{item.q}</td>
+    //         //     </tr>
+    //         // );
+    //     }
+    //     catch (err) {
+    //         console.log(err);
+    //     }
+    // };
 
-    ws.current.onopen = (event) => {
-        ws.current.send(JSON.stringify(apiCall));
-    };
-
-    ws.current.onmessage = function (event) {
-        tradeInfo = JSON.parse(event.data);
-        try {
-            console.log(tradeInfo);
-
-            // const rows = tradeInfo.map((item, index) => 
-            //     <tr key={index}>
-            //         <td>{item.p}</td>
-            //         <td>{item.q}</td>
-            //     </tr>
-            // );
-        }
-        catch (err) {
-            console.log(err);
-        }
-    };
-
-    return(rows);
+    return(<>{bidsRows}{asksRows}</>);
 };
 
 export default WebSocket_call;
