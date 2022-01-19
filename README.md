@@ -1,4 +1,4 @@
-# Getting Started with Create React WebSocket App
+# Getting Started with React WebSocket App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -46,6 +46,10 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Developer
+
+Rahil Enayati
 
 ### Code Splitting
 
