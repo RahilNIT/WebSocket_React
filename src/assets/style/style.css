@@ -1,0 +1,44 @@
+
+/*#region General Css*/
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.d-none {
+    display: none;
+}
+
+.d-inline {
+    display: inline;
+}
+
+.width-200{
+    width:200px;
+}
+
+.font-size-large {
+    font-size: large;
+}
+
+td, th {
+    padding: 5px 10px;
+    text-align: left;
+    width: 100px;
+  }
+
+  .float-right {
+      float: right;
+  }
+
+/*#endregion General*/
+
+/*#region material UI*/
+
+
+.MuiSelect-select{
+    padding: 10px 30px !important;
+}
+
+
+/*#endregion*/

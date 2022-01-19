@@ -1,0 +1,18 @@
+.dark-theme {
+    background-color: #000 !important;
+    color: #eee !important;
+    border-color: #eee!important;
+}
+
+.theme-icon {
+    position: absolute;
+    top: 25px;
+    height:18px;
+    padding: 0 20px;
+}
+
+.dark-theme .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root,
+.dark-theme .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+    color: #eee !important;
+    border-color: #eee!important;
+}

@@ -1,0 +1,25 @@
+
+.order-book {
+    padding: 20px 0;
+    overflow-y:scroll;
+    height: 100%;
+}
+
+header {
+    line-height: 32px;
+    height: 40px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+}
+
+tr[data-type="bid"]{
+    color: rgb(8, 151, 43) !important;;
+}
+
+tr[data-type="ask"]{
+    color: red !important;;
+}
