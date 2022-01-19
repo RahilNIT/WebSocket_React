@@ -31,8 +31,6 @@ const OrderBook = (props) => {
         document.getElementById('anount-header-name').innerHTML = "Amount (" + unit + ")";
     }
 
-    const rows = WebSocket_call(order);
-
     return (
         <div>
             <header>
@@ -54,7 +52,7 @@ const OrderBook = (props) => {
                         <th>Price (USDT)</th>
                         <th id="anount-header-name">Amount (BTC)</th>
                     </tr>
-                    {rows}
+                    <WebSocket_call order={order}/>
                 </table>
             </div>
         </div>
