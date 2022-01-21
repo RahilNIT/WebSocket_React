@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { memo, useState, useEffect, useRef } from 'react';
 
 const WebSocket_call = (orderOBJ) => {
 
@@ -63,4 +63,4 @@ const WebSocket_call = (orderOBJ) => {
     return(<>{bidsRows}{asksRows}</>);
 };
 
-export default WebSocket_call;
+export default memo(WebSocket_call);
